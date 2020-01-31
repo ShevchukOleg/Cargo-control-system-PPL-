@@ -1,0 +1,28 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <p>Для поиска истории контейнера введите его номер</p>
+      <!-- <form #cargoContainerForm="ngForm">
+        <div class="searchingField">
+          <label for="searchingNumber">Маркировочный номер контейнера</label>
+          <input #trackInput [(ngModel)]="containerId" (input)="inputId()" name="containerId" type="text" class="form-control" required maxlength="11">
+        </div>
+        <div class="operations">
+          <button type="submit">Поиск</button>
+          <button type="reset">Очистить</button>
+        </div>
+      </form> -->
+      <br>
+      <form [formGroup]="reactiveForm" (input)="inputRF()" (ngSubmit)="onSubmitRF()">
+        <div class="searchingField">
+          <label>Маркировочный номер контейнера</label>
+          <input formControlName="containerNumber" type="text" class="form-control">
+        </div>
+        <div class="operations">
+          <button type="submit">Поиск</button>
+          <button type="reset">Очистить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
