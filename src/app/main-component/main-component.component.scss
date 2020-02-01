@@ -1,0 +1,89 @@
+@mixin content-font($color, $size, $weight: normal) {
+  font: {
+    family: 'Ubuntu', sans-serif;
+    size: $size;
+    weight: $weight
+  }
+  color: $color
+}
+
+section {
+  background-color: #f5f8fb;
+}
+
+.contentWrapper {
+  padding: 30px 0;
+  width: 100%;
+
+  .logoWrapper {
+    height: 120px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+    margin: 0 40px 0 0;
+  }
+  margin: 0 15px;
+  p {
+    @include content-font(black, 28px, bold);
+    margin: auto 15px;
+  }
+}
+
+.mainForm {
+  height: 245px;
+  width: 90%;
+  margin: 20px auto 10px;
+  padding: 30px 60px;
+  border-radius: 7px;
+  box-shadow: 1px 3px 25px 6px rgb(145, 178, 235);
+  .searchingField {
+    display: flex;
+    flex-direction: column;
+    label {
+      user-select: none;
+      @include content-font(black, 22px, bold);
+      line-height: 26px;
+      margin: 0 0 20px;
+    }
+
+    p.exemple {
+      @include content-font(black, 20px);
+    }
+
+    .inputGroup {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid rgb(154, 179, 223);
+      box-shadow: inset 0px 0px 6px 3px #D9FFFD;
+      overflow: hidden;
+      .inputPrepend {
+        display: flex;
+        margin-right: -1px;
+        color: #212529;
+        span {
+          padding: .375rem 1rem;
+          line-height: 24px;
+          font-size: 16px;
+          text-align: center;
+          white-space: nowrap;
+          border: 1px solid #ced4da;
+          user-select: none;
+        };
+      }
+      input {
+        flex: 1 1 auto;
+        width: 1%;
+        outline: none;
+        padding: .375rem 1.2rem;
+        font-size: 16px;
+        line-height: 24px;
+        background: transparent;
+      }
+    }
+  }
+}

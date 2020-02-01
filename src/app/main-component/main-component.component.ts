@@ -156,4 +156,8 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
       this.messageService.add({severity: 'error', summary: 'Ошибка ввода!', detail: 'Неверный номер контейнера', life: 4500});
     }
   }
+
+  formReset() {
+    this.reactiveForm.reset();
+  }
 }

@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 5px 0 5px;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+header {
+  height: 120px;
+  background: url(./assets/header-background_2.jpg) #2d4d8a no-repeat;
+  background-position: right bottom;
+  background-size: contain;
+  color: white;
+  h1 {
+    margin: 40px auto 10px  20px;
+    font: {
+      family: 'Bebas Neue', cursive;
+      size: 36px;
+      weight: 600;
+    }
+    text-shadow: 3px 5px 4px rgb(44, 82, 76);
+  }
+}
+
+section {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border: 0;
+}
+
+.container {
+  display: block;
+  width: 100%;
+  max-width: 1140px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.dFlex {
+  display: flex !important;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.justifyBetween {
+  justify-content: space-between;
+}
+
+.justifyAround {
+  justify-content: space-around;
+}
+
+.alignStart {
+  align-items: flex-start;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.h100s {
+  height: 100vh;
+}
+
+.h100p {
+  height: 100%;
+}

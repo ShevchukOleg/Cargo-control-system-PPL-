@@ -1,21 +1,39 @@
 <section>
   <div class="container">
+    <div class="row justifyCenter">
+      <div class="contentWrapper dFlex">
+        <div class="logoWrapper">
+          <img src="../../assets/more-7.png" alt="cargo ship" class="logotype">
+        </div>
+        <p>Для поиска истории контейнера введите его номер</p>
+      </div>
+    </div>
     <div class="row">
-      <p>Для поиска истории контейнера введите его номер</p>
-      <form [formGroup]="reactiveForm" (input)="inputRF()" (ngSubmit)="onSubmitRF()">
+      <form class="mainForm" [formGroup]="reactiveForm" (input)="inputRF()" (ngSubmit)="onSubmitRF()">
         <div class="searchingField">
-          <label>Маркировочный номер контейнера RZDU1234569</label>
-          <input formControlName="containerNumber" type="text" class="form-control" maxlength="11">
+          <label>Маркировочный номер контейнера</label>
+          <div class="inputGroup">
+            <div class="inputPrepend">
+              <span>🔎</span>
+            </div>
+            <input formControlName="containerNumber" placeholder="wxyz1234567" type="text" class="form-control" maxlength="11">
+          </div>
+
           <p *ngIf="!formIsValid">Введите номер согласно стандарту</p>
+          <p class="exemple">Например: RZDU1234569</p>
         </div>
         <div class="operations">
           <button type="submit">Поиск</button>
-          <button type="reset">Очистить</button>
+          <button type="reset" (click)="formReset()">Очистить</button>
         </div>
       </form>
     </div>
+  </div>
+</section>
+<section *ngIf="!!containerInfo">
+  <div class="container">
     <div class="row">
-      <div class="contentWrapper" *ngIf="!!containerInfo">
+      <div class="contentWrapper">
         <p>{{containerInfo.id}}</p>
       </div>
     </div>
