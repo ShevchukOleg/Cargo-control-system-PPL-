@@ -11,13 +11,19 @@ import {MessageService} from 'primeng/api';
   styleUrls: ['./main-component.component.scss']
 })
 export class MainComponentComponent implements OnInit, OnDestroy  {
-
+  // Array of observer subscriptions
   subscriptions: Array<Subscription> = [];
+  // Previous input state
   prevInputValue: string;
+  // Reactive form declaration
   reactiveForm: FormGroup;
+  // Handwritten timer for warning about incorrect data entry
   timer: any;
+  // Form state flag
   formIsValid = true;
+  // Data from the server about the container
   containerInfo: ServerResponse;
+  // Decoding table
   private checkSumUcoding = {
     a: 10,
     b: 12,
@@ -51,7 +57,8 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
     public mainService: MainService,
     private messageService: MessageService
   ) { }
-
+  // When component class starts, an instance of the form is created and its properties
+  // are determined. Then all subscriptions are announced and saved
   ngOnInit() {
     this.reactiveForm = new FormGroup({
       containerNumber: new FormControl('', [Validators.required, Validators.maxLength(11)])
@@ -62,7 +69,7 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
         (data: ServerResponse) => {
           if (!!data.id) {
             this.containerInfo = Object.assign(data);
-            console.log('Container data in component', this.containerInfo);
+            this.reactiveForm.reset();
           } else {
             console.log('Data not yet received from server');
           }
@@ -71,7 +78,7 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
       )
     );
   }
-
+  // Unsubscribing from service events
   ngOnDestroy(): void {
     this.subscriptions.forEach(
       (subscription) => {
@@ -81,9 +88,13 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
     );
     this.subscriptions = [];
   }
-
+  /**
+   *  - Form input control function using valodation
+   */
   inputRF(): void {
+    // Entry field
     const input = this.reactiveForm.get('containerNumber');
+    // Validation result of input data
     const stringIsValid: any = this.inputStringValidator(input.value);
 
     if (stringIsValid) {
@@ -96,7 +107,10 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
       input.setValue(this.prevInputValue);
     }
   }
-
+  /**
+   * Data Entry Structure Validator
+   * @param currentString  input string value
+   */
   inputStringValidator(currentString: string): boolean {
     const lgth = currentString.length;
     let result: boolean;
@@ -125,7 +139,10 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
 
     return result;
   }
-
+  /**
+   * The function of checking the correctness of the entered container number
+   * @param containerCode  - container number
+   */
   containerNumberCheck(containerCode: string): boolean {
     const codeArr = containerCode.split('').slice(0, -1);
     let ekvivalent: number;
@@ -144,19 +161,21 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
     const matching = (controlNumber % 11 !== 10) ? controlNumber % 11 :  0;
     return matching === +containerCode[10];
   }
-
+  /**
+   * Submit processing function with verification of the correct number entry
+   */
   onSubmitRF() {
     const input = this.reactiveForm.get('containerNumber');
-    console.log('Форма засабмічена', this.reactiveForm.value);
     const check = this.containerNumberCheck(input.value);
-    console.log(check);
     if (check) {
       this.mainService.checkContainerInfo(input.value);
     } else {
       this.messageService.add({severity: 'error', summary: 'Ошибка ввода!', detail: 'Неверный номер контейнера', life: 4500});
     }
   }
-
+  /**
+   * reset form state
+   */
   formReset() {
     this.reactiveForm.reset();
   }

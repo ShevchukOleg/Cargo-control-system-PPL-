@@ -7,13 +7,9 @@
   color: $color
 }
 
-section {
-  background-color: #f5f8fb;
-}
 
 .contentWrapper {
   padding: 30px 0;
-  width: 100%;
 
   .logoWrapper {
     height: 120px;
@@ -22,34 +18,53 @@ section {
       width: 100%;
       object-fit: contain;
     }
-    margin: 0 40px 0 0;
+    margin: 0 10px 0 0;
   }
-  margin: 0 15px;
+  margin: 0 20px;
   p {
-    @include content-font(black, 28px, bold);
+    text-align: center;
+    @include content-font(black, 22px, bold);
     margin: auto 15px;
+    user-select: none;
   }
 }
 
 .mainForm {
-  height: 245px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
   width: 90%;
-  margin: 20px auto 10px;
-  padding: 30px 60px;
+  margin: 20px auto;
+  padding: 10px 35px;
   border-radius: 7px;
+  background-color: #fff;
   box-shadow: 1px 3px 25px 6px rgb(145, 178, 235);
   .searchingField {
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    width: 450px;
     label {
       user-select: none;
       @include content-font(black, 22px, bold);
       line-height: 26px;
-      margin: 0 0 20px;
+      margin: 0 auto 20px;
+    }
+
+    p.warn {
+      margin: 10px 5px;
+      @include content-font(#d41c1cb9, 17px, 800);
+      transition: 0.4s;
+      padding: 0 10px;
+      z-index: 1;
     }
 
     p.exemple {
-      @include content-font(black, 20px);
+      margin: 10px 5px;
+      @include content-font(#08232b75, 16px, 600);
+      font-style: italic;
     }
 
     .inputGroup {
@@ -63,8 +78,12 @@ section {
       overflow: hidden;
       .inputPrepend {
         display: flex;
+        cursor: pointer;
         margin-right: -1px;
         color: #212529;
+        &:hover {
+          color: #3f4953;
+        }
         span {
           padding: .375rem 1rem;
           line-height: 24px;
@@ -85,5 +104,163 @@ section {
         background: transparent;
       }
     }
+  }
+  .operations {
+    margin: 5px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    button {
+      outline: none;
+      width: 100px;
+      margin: auto 5px;
+      height: 40px;
+      border-radius: 4px;
+      cursor: pointer;
+      line-height: 28px;
+      @include content-font(#273e8d, 18px, 600);
+      overflow: hidden;
+      user-select: none;
+      &[type="submit"] {
+
+        margin-right: 15px;
+        background-color: #a7e7ff;
+        box-shadow: inset 0px 0px 8px 1px #D7FFE3, 1px 3px 5px 0px #666666;
+        border: 1px solid rgb(106, 143, 117);
+        &:hover {
+          transform: translate(-1px, -2px);
+          transition: 0.2s;
+          box-shadow: inset 0px 0px 8px 1px #D7FFE3, 1px 3px 6px 0px #8d8b8b;
+          background-color: #9ce1fa;
+        }
+      }
+
+      &[type="reset"] {
+        margin-left: 15px;
+        background-color: #f5f7a7;
+        box-shadow: inset 0px 0px 8px 1px rgb(244, 255, 205), 1px 3px 5px 0px #666666;
+        border: 1px solid rgb(106, 143, 117);
+        &:hover {
+          transform: translate(-1px, -2px);
+          transition: 0.2s;
+          box-shadow: inset 0px 0px 8px 1px rgb(250, 252, 160), 1px 3px 6px 0px #8d8b8b;
+          background-color: #fbfd91;
+        }
+      }
+    }
+  }
+}
+
+.containerHistory {
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  margin: 10px auto;
+  padding: 10px;
+  // flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  .mainInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px auto;
+    flex:  1 1 100%;
+    h2 {
+      text-align: center;
+      @include content-font(#273e8d, 22px, 600);
+    }
+    span {
+      @include content-font(#273e8d, 18px, 500);
+    }
+  }
+
+  .passage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 430px;
+    background-color: rgb(203, 248, 217);
+    border-radius: 5px;
+    box-shadow: 1px 3px 13px 3px #91b2eb;
+    margin: 17px auto;
+    padding: 8px 5px;
+    .imgWrapper {
+      height: 100px;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    margin: 5px 10px 5px 5px;
+    }
+
+    .requisites {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      flex-wrap: wrap;
+
+    }
+    .microBloc-2p {
+      margin: 5px 10px;
+      display: flex;
+      overflow: hidden;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      p {
+        @include content-font(#0b1229, 16px, 500);
+      }
+
+      span {
+        @include content-font(#0b1229, 16px, 600);
+        &:first-of-type {
+          margin-bottom: 6px;
+        }
+        }
+    }
+
+    .microBlocCentral {
+      @extend .microBloc-2p;
+      align-items: center;
+
+    }
+
+  }
+}
+
+
+@media(min-width: 425px) {
+  .mainForm {
+    padding: 10px 60px;
+  }
+
+  .containerHistory {
+    width: 90%;
+    padding: 5px 15px;
+  }
+}
+
+@media(min-width: 960px) {
+  .contentWrapper {
+    p {
+      @include content-font(#080e22, 28px, 600);
+      text-align: start;
+    }
+    .logoWrapper {
+      height: 120px;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+      margin: 0 40px 0 0;
+    }
+  }
+
+  .passage {
+    min-width: 650px;
   }
 }

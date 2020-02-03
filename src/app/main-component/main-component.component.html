@@ -9,18 +9,19 @@
       </div>
     </div>
     <div class="row">
+      <p-toast position="top-right"></p-toast>
       <form class="mainForm" [formGroup]="reactiveForm" (input)="inputRF()" (ngSubmit)="onSubmitRF()">
         <div class="searchingField">
           <label>Маркировочный номер контейнера</label>
           <div class="inputGroup">
-            <div class="inputPrepend">
+            <div (click)="onSubmitRF()" class="inputPrepend">
               <span>🔎</span>
             </div>
             <input formControlName="containerNumber" placeholder="wxyz1234567" type="text" class="form-control" maxlength="11">
           </div>
 
-          <p *ngIf="!formIsValid">Введите номер согласно стандарту</p>
-          <p class="exemple">Например: RZDU1234569</p>
+          <p class="warn" *ngIf="!formIsValid">Введите номер согласно стандарту!</p>
+          <p class="exemple" *ngIf="formIsValid">Например: RZDU1234569</p>
         </div>
         <div class="operations">
           <button type="submit">Поиск</button>
@@ -33,8 +34,30 @@
 <section *ngIf="!!containerInfo">
   <div class="container">
     <div class="row">
-      <div class="contentWrapper">
-        <p>{{containerInfo.id}}</p>
+      <div class="containerHistory">
+        <div class="mainInfo">
+          <h2>Реестровый номер: {{containerInfo.id}}</h2>
+          <span>Собственник: {{containerInfo.owner}}</span>
+        </div>
+        <div *ngFor="let period of containerInfo.history" class="passage">
+          <div class="imgWrapper">
+            <img src="../../assets/more-5.png" alt="container">
+          </div>
+          <div class="requisites">
+            <div class="microBloc-2p">
+              <p>Отправлено: <span>{{period.dateFrom}}</span></p>
+              <p>Прибыл: <span>{{period.dateTo}}</span></p>
+            </div>
+            <div class="microBloc-2p">
+              <p>Отправитель: <span>{{period.sender}}</span></p>
+              <p>Получатель: <span>{{ period?.recipient}}</span></p>
+            </div>
+          </div>
+          <div class="microBlocCentral">
+            <p>Порт отправки:</p><span>{{period.sourcePort}}</span>
+            <p>Порт прибытия:</p><span>{{period.destinationPort}}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

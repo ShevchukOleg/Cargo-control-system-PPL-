@@ -16,21 +16,27 @@ div {
 
 header {
   height: 120px;
+  width: 100%;
   background: url(./assets/header-background_2.jpg) #2d4d8a no-repeat;
   background-position: right bottom;
   background-size: contain;
   color: white;
   h1 {
-    margin: 40px auto 10px  20px;
+    margin: 13px 10px 10px auto;
+    overflow: hidden;
+    flex: .8 1 90%;
     font: {
       family: 'Bebas Neue', cursive;
-      size: 36px;
+      size: 31px;
       weight: 600;
     }
     text-shadow: 3px 5px 4px rgb(44, 82, 76);
   }
 }
 
+main {
+  width: 100%;
+}
 section {
   margin: 0;
   padding: 0;
@@ -84,4 +90,18 @@ section {
 
 .h100p {
   height: 100%;
+}
+
+@media(min-width: 425px) {
+  header {
+    h1 {
+      margin: 40px 20px 10px  auto;
+      font: {
+        family: 'Bebas Neue', cursive;
+        size: 36px;
+        weight: 600;
+      }
+      text-shadow: 3px 5px 4px rgb(44, 82, 76);
+    }
+  }
 }
