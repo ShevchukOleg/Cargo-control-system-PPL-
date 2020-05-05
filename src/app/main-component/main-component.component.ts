@@ -1,16 +1,16 @@
-import { Component, OnInit, OnDestroy  } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MainService } from '../mainService/main.service';
 import { Subscription } from 'rxjs';
 import { ServerResponse } from '../interfaces/serverResponseInterface';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-main-component',
   templateUrl: './main-component.component.html',
   styleUrls: ['./main-component.component.scss']
 })
-export class MainComponentComponent implements OnInit, OnDestroy  {
+export class MainComponentComponent implements OnInit, OnDestroy {
   // Array of observer subscriptions
   subscriptions: Array<Subscription> = [];
   // Previous input state
@@ -68,7 +68,7 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
       this.mainService.containerObservableSubject.subscribe(
         (data: ServerResponse) => {
           if (!!data.id) {
-            this.containerInfo = Object.assign(data);
+            this.containerInfo = Object.assign({}, data);
             this.reactiveForm.reset();
           } else {
             console.log('Data not yet received from server');
@@ -101,9 +101,9 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
       this.prevInputValue = input.value;
     } else if (!stringIsValid && !this.prevInputValue) {
       input.setValue('');
-    } else if (input.value === '' && this.prevInputValue ) {
+    } else if (input.value === '' && this.prevInputValue) {
       input.setValue('');
-    } else if (!stringIsValid && this.prevInputValue ) {
+    } else if (!stringIsValid && this.prevInputValue) {
       input.setValue(this.prevInputValue);
     }
   }
@@ -128,7 +128,7 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
       } else if (i >= 4 && currentString[i].match(/[0-9]/)) {
         result = true;
       } else if (i >= 4 && !currentString[i].match(/[0-9]/)) {
-        result =  false;
+        result = false;
         break;
       }
     }
@@ -158,7 +158,7 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
       }, 0
     );
 
-    const matching = (controlNumber % 11 !== 10) ? controlNumber % 11 :  0;
+    const matching = (controlNumber % 11 !== 10) ? controlNumber % 11 : 0;
     return matching === +containerCode[10];
   }
   /**
@@ -170,7 +170,7 @@ export class MainComponentComponent implements OnInit, OnDestroy  {
     if (check) {
       this.mainService.checkContainerInfo(input.value);
     } else {
-      this.messageService.add({severity: 'error', summary: 'Ошибка ввода!', detail: 'Неверный номер контейнера', life: 4500});
+      this.messageService.add({ severity: 'error', summary: 'Ошибка ввода!', detail: 'Неверный номер контейнера', life: 4500 });
     }
   }
   /**

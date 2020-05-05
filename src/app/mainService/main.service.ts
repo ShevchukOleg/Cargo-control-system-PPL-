@@ -25,7 +25,7 @@ export class MainService {
     const options = { params: new HttpParams().append('numer', containerCode.toLowerCase() ) };
     this.http.get<ServerResponse>(`${this.apiUrl}`, options).subscribe(
       (response: ServerResponse) => {
-        this.containerSource.next(Object.assign(response));
+        this.containerSource.next(Object.assign({}, response));
       },
       (error) => console.error(error)
     );
